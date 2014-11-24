@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FragmentAndFileFundamentals</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint">Type Text Here</string>
+    <string name="team">Team Selected</string>
+    <string name="selected">You selected\n%1$s.</string>
+    <string name="ok">OK</string>
+    <string name="add">Go</string>
+    <string-array name="teamList">
+        <item>Charlotte</item>
+        <item>New York</item>
+        <item>Miami</item>
+        <item>Chicago</item>
+        <item>Atlanta</item>
+        <item>Cleveland</item>
+        <item>Brooklyn</item>
+        <item>Washington</item>
+    </string-array>
+</resources>
