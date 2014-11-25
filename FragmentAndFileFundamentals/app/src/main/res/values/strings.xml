@@ -4,11 +4,17 @@
     <string name="app_name">FragmentAndFileFundamentals</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="hint">Type Text Here</string>
+    <string name="hint">Type Number of the Week Here</string>
     <string name="team">Team Selected</string>
     <string name="selected">You selected\n%1$s.</string>
     <string name="ok">OK</string>
     <string name="add">Go</string>
+    <string name="name">Name:</string>
+    <string name="nick">Nickname:</string>
+    <string name="mascot">Mascot:</string>
+    <string name="home">Home Team::</string>
+    <string name="away">Away Team::</string>
+    <string name="venue">Venue::</string>
     <string-array name="teamList">
         <item>Charlotte</item>
         <item>New York</item>

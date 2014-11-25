@@ -1,9 +1,12 @@
 package com.brianstacks.fragmentandfilefundamentals.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,10 +20,33 @@ import com.brianstacks.fragmentandfilefundamentals.R;
 public class MyListFragment extends ListFragment {
 
     public static final String TAG = "MyListFragment.TAG";
-
+    private OnListItemClickListener mListener;
     public static MyListFragment newInstance() {
         MyListFragment frag = new MyListFragment();
         return frag;
+    }
+
+    public interface OnListItemClickListener{
+
+        //public void displayText(String myText);
+    }
+
+    @Override
+    public void  onAttach(Activity activity){
+        super.onAttach(activity);
+
+        if (activity instanceof OnListItemClickListener){
+            mListener = (OnListItemClickListener) activity;
+        }else {
+            throw new IllegalArgumentException("Containing Activity must implement the OnListItemClicked");
+        }
+    }
+    @Override
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container,
+                             Bundle _savedInstanceState) {
+        // Create and return view for this fragment.
+        View view = _inflater.inflate(R.layout.display_fragment, _container, false);
+        return view;
     }
 
     @Override
@@ -38,4 +64,6 @@ public class MyListFragment extends ListFragment {
                 .setPositiveButton(R.string.ok, null)
                 .show();
     }
+
+
 }
