@@ -132,32 +132,7 @@ public class MyListFragment extends ListFragment {
         return netInfo != null && netInfo.isConnectedOrConnecting();
 
     }
-
-    public void onClick(View v) {
-
-        mySpin = (Spinner) v.findViewById(R.id.myEditText);
-        mySpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String myString  = parent.getItemAtPosition(position).toString();
-                Log.v("My String:",myString);
-                // replace the spaces with + to encode into the url
-                Log.v("EditText String here:", myString);
-                String encodedString = myString.replace(" ", "+");
-                //check to see if online and if so continue to get the JSON data if not toast a message telling the user no connection
-                if (isOnline()) {
-                    requestData("http://api.sportsdatallc.org/nfl-t1/2014/REG/" + encodedString + "/schedule.json?api_key=ytdtx2yuu95p83g3yu2v4cvu");
-                } else
-                    Toast.makeText(getActivity(), "Network isn't available", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
+    
     // Async task method to do network action in
     private class MyTask extends AsyncTask<String, String, String> {
 
@@ -174,8 +149,6 @@ public class MyListFragment extends ListFragment {
 
         @Override
         protected void onPostExecute(String result) {
-
-
             if (result == null){
                 Toast.makeText(getActivity(), "Can't connect to API", Toast.LENGTH_SHORT).show();
                 return;
