@@ -17,6 +17,7 @@ import com.brianstacks.fragmentandfilefundamentals.Games;
 import com.brianstacks.fragmentandfilefundamentals.GamesAdapter;
 import com.brianstacks.fragmentandfilefundamentals.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -27,12 +28,14 @@ import java.util.ArrayList;
 public class MyListFragment extends ListFragment {
     ArrayList<Games>  gameList;
     Spinner mySpin;
-
+    public static final String GameList_Text = "DetailFragment.Arg_Text";
     public static final String TAG = "MyListFragment.TAG";
     private OnListItemClickListener mListener;
     public static MyListFragment newInstance(ArrayList<Games> gameList) {
         MyListFragment frag = new MyListFragment();
-
+        Bundle args= new Bundle();
+        args.putSerializable(GameList_Text, gameList);
+        frag.setArguments(args);
         return frag;
     }
 
@@ -62,6 +65,10 @@ public class MyListFragment extends ListFragment {
     @Override
     public void onActivityCreated(final Bundle _savedInstanceState) {
         super.onActivityCreated(_savedInstanceState);
+        Bundle args =getArguments();
+        if (args != null && args.containsKey(GameList_Text)){
+            getGameList(args.getSerializable(GameList_Text));
+        }
         mySpin = (Spinner) getView().findViewById(R.id.myEditText);
         String[] spinnerNumbers = getResources().getStringArray(R.array.weeksList);
         if (mySpin != null) {
@@ -77,6 +84,11 @@ public class MyListFragment extends ListFragment {
     public void onListItemClick(ListView _l, View _v, int _position, long _id) {
         String team = (String)_l.getItemAtPosition(_position);
         mListener.displayText(team);
+
+    }
+
+    public void getGameList(Serializable gameList) {
+
 
     }
 

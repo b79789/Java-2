@@ -1,11 +1,13 @@
 package com.brianstacks.fragmentandfilefundamentals;
 
+import java.io.Serializable;
+
 /**
  * Created by Brian Stacks
  * on 11/25/14
  * for FullSail.edu.
  */
-public class Games {
+public class Games implements Serializable{
     private String tHome;
     private String tAway;
     private String tVenue;
