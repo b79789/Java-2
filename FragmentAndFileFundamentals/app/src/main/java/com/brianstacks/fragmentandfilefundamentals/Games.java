@@ -7,7 +7,7 @@ import java.io.Serializable;
  * on 11/25/14
  * for FullSail.edu.
  */
-public class Games implements Serializable{
+public class Games {
     private String tHome;
     private String tAway;
     private String tVenue;
