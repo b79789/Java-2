@@ -17,9 +17,13 @@ import com.brianstacks.fragmentandfilefundamentals.R;
  */
 public class DetailFragment extends Fragment {
     public static final String TAG = "DetailFragment.TAG";
+    public static final String Arg_Text = "DetailFragment.Arg_Text";
 
-    public static DetailFragment newInstance(){
+    public static DetailFragment newInstance(String myText){
         DetailFragment dFrag = new DetailFragment();
+        Bundle args= new Bundle();
+        args.putString(Arg_Text,myText);
+        dFrag.setArguments(args);
         return  dFrag;
     }
     @Override
@@ -32,10 +36,11 @@ public class DetailFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle _savedInstanceState) {
         super.onActivityCreated(_savedInstanceState);
-        TextView t1 =(TextView) getActivity().findViewById(R.id.text1);
-        TextView t2 =(TextView) getActivity().findViewById(R.id.text2);
-        TextView t3 =(TextView) getActivity().findViewById(R.id.text3);
-        t1.setText("hello");
+
+        Bundle args =getArguments();
+        if (args != null && args.containsKey(Arg_Text)){
+            setDisplayInfo(args.getString(Arg_Text));
+        }
 
 
     }
@@ -43,8 +48,10 @@ public class DetailFragment extends Fragment {
     public void setDisplayInfo(String myText){
        // getArguments().putString(ARG_TAG,myText);
         // Get our TextView and set some text to it.
-        TextView tv;
-        tv = (TextView)getView().findViewById(R.id.text1);
-        tv.setText(myText);
+
+        TextView t1 =(TextView) getActivity().findViewById(R.id.text1);
+        TextView t2 =(TextView) getActivity().findViewById(R.id.text2);
+        TextView t3 =(TextView) getActivity().findViewById(R.id.text3);
+        t1.setText(myText);
     }
 }

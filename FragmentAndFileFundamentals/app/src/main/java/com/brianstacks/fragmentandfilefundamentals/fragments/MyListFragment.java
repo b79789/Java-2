@@ -4,13 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
+import com.brianstacks.fragmentandfilefundamentals.Games;
+import com.brianstacks.fragmentandfilefundamentals.GamesAdapter;
 import com.brianstacks.fragmentandfilefundamentals.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Brian Stacks
@@ -18,17 +25,20 @@ import com.brianstacks.fragmentandfilefundamentals.R;
  * for FullSail.edu.
  */
 public class MyListFragment extends ListFragment {
+    ArrayList<Games>  gameList;
+    Spinner mySpin;
 
     public static final String TAG = "MyListFragment.TAG";
     private OnListItemClickListener mListener;
-    public static MyListFragment newInstance() {
+    public static MyListFragment newInstance(ArrayList<Games> gameList) {
         MyListFragment frag = new MyListFragment();
+
         return frag;
     }
 
     public interface OnListItemClickListener{
 
-        //public void displayText(String myText);
+        public void displayText(String myText);
     }
 
     @Override
@@ -50,19 +60,24 @@ public class MyListFragment extends ListFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle _savedInstanceState) {
+    public void onActivityCreated(final Bundle _savedInstanceState) {
         super.onActivityCreated(_savedInstanceState);
+        mySpin = (Spinner) getView().findViewById(R.id.myEditText);
+        String[] spinnerNumbers = getResources().getStringArray(R.array.weeksList);
+        if (mySpin != null) {
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, spinnerNumbers);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mySpin.setAdapter(arrayAdapter);
+        }
         String[] teams = getResources().getStringArray(R.array.teamList);
+        GamesAdapter adapter2 = new GamesAdapter(this.getActivity(),R.layout.item_place,gameList);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, teams);
         setListAdapter(adapter);
     }
     public void onListItemClick(ListView _l, View _v, int _position, long _id) {
         String team = (String)_l.getItemAtPosition(_position);
-        new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.team)
-                .setMessage(getString(R.string.selected, team))
-                .setPositiveButton(R.string.ok, null)
-                .show();
+        mListener.displayText(team);
+
     }
 
 

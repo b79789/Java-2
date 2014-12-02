@@ -20,7 +20,6 @@ public class JSONParser {
         try {
             myObj = new JSONObject(content);
             JSONArray result = myObj.getJSONArray("games");
-            Log.v("List Objects:",result.toString());
             List<Games> gamesList = new ArrayList<>();
 
             for (int i = 0; i < result.length(); i++) {
@@ -29,7 +28,7 @@ public class JSONParser {
                 games.setHome(obj.getString("home"));
                 games.setAways(obj.getString("away"));
                 games.setVenue(obj.getString("venue"));
-                //place.setPhotos(obj.getString("photos"));
+
 
                 gamesList.add(games);
             }
