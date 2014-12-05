@@ -12,9 +12,9 @@
     <string name="name">Name:</string>
     <string name="nick">Nickname:</string>
     <string name="mascot">Mascot:</string>
-    <string name="home">Home Team::</string>
-    <string name="away">Away Team::</string>
-    <string name="venue">Venue::</string>
+    <string name="home">Home Team:</string>
+    <string name="away">Away Team:</string>
+    <string name="venue">Venue:</string>
     <string-array name="teamList">
         <item>Charlotte</item>
         <item>New York</item>

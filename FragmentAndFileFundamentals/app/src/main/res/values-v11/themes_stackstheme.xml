@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="StacksTheme" parent="@style/_StacksTheme"/>
+
+  <style name="_StacksTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <item name="android:editTextBackground">@drawable/stackstheme_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#9999cc00</item>
+    <item name="android:textSelectHandleLeft">@drawable/stackstheme_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/stackstheme_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/stackstheme_text_select_handle_middle</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewStacksTheme</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/stackstheme_btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/stackstheme_btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/ButtonStacksTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonStacksTheme</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerStacksTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarStacksTheme</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarStacksTheme</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarStacksTheme</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigStacksTheme</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallStacksTheme</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleStacksTheme</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/stackstheme_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/stackstheme_activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/stackstheme_fastscroll_thumb_holo</item>
+
+  </style>
+
+</resources>

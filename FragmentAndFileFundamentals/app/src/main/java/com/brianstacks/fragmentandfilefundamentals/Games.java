@@ -7,7 +7,8 @@ import java.io.Serializable;
  * on 11/25/14
  * for FullSail.edu.
  */
-public class Games {
+public class Games implements Serializable{
+    private static final long serialVersionUID = 8733333333330552888L;
     private String tHome;
     private String tAway;
     private String tVenue;

@@ -1,7 +1,6 @@
 package com.brianstacks.fragmentandfilefundamentals.fragments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -18,15 +17,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.brianstacks.fragmentandfilefundamentals.Games;
 import com.brianstacks.fragmentandfilefundamentals.GamesAdapter;
 import com.brianstacks.fragmentandfilefundamentals.HttpManager;
 import com.brianstacks.fragmentandfilefundamentals.JSONParser;
-import com.brianstacks.fragmentandfilefundamentals.MainActivity;
 import com.brianstacks.fragmentandfilefundamentals.R;
+import com.brianstacks.fragmentandfilefundamentals.helperclass.Helper;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 
 /**
  * Created by Brian Stacks
@@ -49,7 +54,7 @@ public class MyListFragment extends ListFragment {
 
     public interface OnListItemClickListener{
 
-        public void displayText(String myText);
+        public void displayText(Games games);
     }
 
     @Override
@@ -66,8 +71,7 @@ public class MyListFragment extends ListFragment {
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container,
                              Bundle _savedInstanceState) {
         // Create and return view for this fragment.
-        View view = _inflater.inflate(R.layout.display_fragment, _container, false);
-        return view;
+        return _inflater.inflate(R.layout.display_fragment, _container, false);
     }
 
     @Override
@@ -87,17 +91,18 @@ public class MyListFragment extends ListFragment {
                     mybutton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Helper helper = new Helper(getActivity());
+                            helper.getNetInfo();
+                            Log.v("Online value:", String.valueOf(helper.getNetInfo()));
                             String myString  = parent.getItemAtPosition(position).toString();
-                            Log.v("My String:",myString);
                             // replace the spaces with + to encode into the url
-                            Log.v("EditText String here:", myString);
                             String encodedString = myString.replace(" ", "+");
                             //check to see if online and if so continue to get the JSON data if not toast a message telling the user no connection
-                            if (isOnline()) {
+                            if (helper.getNetInfo()) {
                                 requestData("http://api.sportsdatallc.org/nfl-t1/2014/REG/" + encodedString + "/schedule.json?api_key=ytdtx2yuu95p83g3yu2v4cvu");
                             } else
-                                Toast.makeText(getActivity(), "Network isn't available", Toast.LENGTH_SHORT).show();
-                        }
+                                requestData("")
+;                        }
                     });
 
                 }
@@ -108,14 +113,11 @@ public class MyListFragment extends ListFragment {
                 }
             });
         }
-        String[] teams = getResources().getStringArray(R.array.teamList);
-        GamesAdapter adapter2 = new GamesAdapter(this.getActivity(),R.layout.item_place,gameList);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, teams);
-        setListAdapter(adapter2);
     }
+
     public void onListItemClick(ListView _l, View _v, int _position, long _id) {
-        String team = (String)_l.getItemAtPosition(_position);
-        mListener.displayText(team);
+        Games game = (Games)_l.getItemAtPosition(_position);
+        mListener.displayText(game);
 
     }
 
@@ -132,7 +134,7 @@ public class MyListFragment extends ListFragment {
         return netInfo != null && netInfo.isConnectedOrConnecting();
 
     }
-    
+
     // Async task method to do network action in
     private class MyTask extends AsyncTask<String, String, String> {
 
@@ -149,15 +151,19 @@ public class MyListFragment extends ListFragment {
 
         @Override
         protected void onPostExecute(String result) {
+            Helper helper = new Helper(getActivity());
             if (result == null){
-                Toast.makeText(getActivity(), "Can't connect to API", Toast.LENGTH_SHORT).show();
+                helper.readFromFile(getActivity(),"result.dat");
+                gameList = (ArrayList<Games>) JSONParser.parseFeed(helper.readFromFile(getActivity(),"result.dat"));
+                final GamesAdapter cArrayAdapter = new GamesAdapter(getActivity(),gameList);
+                setListAdapter(cArrayAdapter);
+                Toast.makeText(getActivity(), "Can't connect to API getting local data.", Toast.LENGTH_SHORT).show();
                 return;
             }
+            helper.writeToFile(getActivity(),"result.dat",result);
             gameList = (ArrayList<Games>) JSONParser.parseFeed(result);
-            updateDisplay(gameList);
-            Log.v("GameList", gameList.get(0).toString());
-
-
+            final GamesAdapter cArrayAdapter = new GamesAdapter(getActivity(),gameList);
+            setListAdapter(cArrayAdapter);
         }
 
         @Override
@@ -167,16 +173,7 @@ public class MyListFragment extends ListFragment {
     }
 
 
-    public void updateDisplay(ArrayList<Games>gameList){
 
-        // get instance of the Master List fragment then replaces container1 and commits it to the activity
 
-        MyListFragment frag = MyListFragment.newInstance(gameList);
-
-        getFragmentManager().beginTransaction()
-
-                .replace(R.id.fragment_container, frag, MyListFragment.TAG).commit();
-
-    }
 
 }

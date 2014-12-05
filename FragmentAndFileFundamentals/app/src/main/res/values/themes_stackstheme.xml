@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="StacksTheme" parent="@style/_StacksTheme"/>
+
+  <style name="_StacksTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <item name="android:editTextStyle">@style/EditTextStacksTheme</item>
+
+    <item name="android:textColorHighlight">#9999cc00</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewStacksTheme</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxStacksTheme</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonStacksTheme</item>
+
+    <item name="android:buttonStyle">@style/ButtonStacksTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonStacksTheme</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerStacksTheme</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemStacksTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarStacksTheme</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarStacksTheme</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarStacksTheme</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigStacksTheme</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallStacksTheme</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleStacksTheme</item>
+
+    <item name="android:listViewStyle">@style/ListViewStacksTheme</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewStacksTheme.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemStacksTheme</item>
+
+  </style>
+
+</resources>
