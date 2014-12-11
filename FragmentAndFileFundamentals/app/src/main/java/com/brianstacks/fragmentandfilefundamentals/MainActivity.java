@@ -27,6 +27,8 @@ public class MainActivity extends Activity implements MyListFragment.OnListItemC
         FragmentTransaction trans = mgr.beginTransaction();
         MyListFragment frag = MyListFragment.newInstance(gamesArrayList);
         trans.replace(R.id.fragment_container, frag, MyListFragment.TAG);
+        DetailFragment dFrag = DetailFragment.newInstance("","","");
+        trans.replace(R.id.fragment_container2,dFrag,DetailFragment.TAG);
         trans.commit();
    }
 

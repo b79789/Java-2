@@ -19,22 +19,21 @@ import java.io.InputStreamReader;
 public class Helper {
 
     private Boolean mOnline;
-    private String tAway;
-    private String tVenue;
 
-    public Helper(Context context){
+
+    public Helper(Context context) {
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()){
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             mOnline = true;
-        }else {
-            mOnline=false;
+        } else {
+            mOnline = false;
         }
 
     }
 
-    public boolean getNetInfo(){
+    public boolean getNetInfo() {
         return mOnline;
     }
 
@@ -67,14 +66,14 @@ public class Helper {
             StringBuffer buffer = new StringBuffer();
             String text = null;
             // Make sure a line of text is available to be read.
-            while((text = reader.readLine()) != null) {
+            while ((text = reader.readLine()) != null) {
                 buffer.append(text + "\n");
             }
             // Close the reader and underlying stream.
             reader.close();
             // Convert the buffer to a string.
             return buffer.toString();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
