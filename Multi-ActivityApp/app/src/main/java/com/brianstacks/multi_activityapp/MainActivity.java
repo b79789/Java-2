@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements DetailFragment.OnFragmentI
                     .commit();
 
         }else {
-            final  DataAdapter dataAdapter = new DataAdapter(this,enteredDataArrayList);
+            DataAdapter dataAdapter = new DataAdapter(this,enteredDataArrayList1);
             listFrag.setListAdapter(dataAdapter);
         }
     }

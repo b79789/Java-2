@@ -71,7 +71,6 @@ public class ListFrag extends ListFragment {
             enteredDataArrayList = (ArrayList<EnteredData>)bundle.getSerializable(enteredDataList_Text);
             final  DataAdapter dataAdapter = new DataAdapter(getActivity(),enteredDataArrayList);
             setListAdapter(dataAdapter);
-        }else {
             Button button = (Button) getActivity().findViewById(R.id.myButton);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
