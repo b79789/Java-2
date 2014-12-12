@@ -8,6 +8,7 @@ import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,24 +65,36 @@ public class ListFrag extends ListFragment {
     @Override
     public void onActivityCreated(final Bundle _savedInstanceState) {
         super.onActivityCreated(_savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if(bundle != null)
+        Button button = (Button) getActivity().findViewById(R.id.myButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager mgr = getFragmentManager();
+                FragmentTransaction trans = mgr.beginTransaction();
+                EnterDataFragment enterDataFragment = EnterDataFragment.newInstance();
+                trans.replace(R.id.fragment_container, enterDataFragment, EnterDataFragment.TAG);
+                trans.commit();
+            }
+        });
+        Bundle args = getArguments();
+        if(args != null && args.containsKey(enteredDataList_Text))
         {
-            enteredDataArrayList = (ArrayList<EnteredData>)bundle.getSerializable(enteredDataList_Text);
+            Log.v("got arguments","got arguments");
+            enteredDataArrayList = (ArrayList<EnteredData>) args.getSerializable(enteredDataList_Text);
             final  DataAdapter dataAdapter = new DataAdapter(getActivity(),enteredDataArrayList);
             setListAdapter(dataAdapter);
-            Button button = (Button) getActivity().findViewById(R.id.myButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentManager mgr = getFragmentManager();
-                    FragmentTransaction trans = mgr.beginTransaction();
-                    EnterDataFragment enterDataFragment = EnterDataFragment.newInstance();
-                    trans.replace(R.id.fragment_container, enterDataFragment, EnterDataFragment.TAG);
-                    trans.commit();
-                }
-            });
+        }else {
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+            builder1.setMessage("Bundle is empty");
+            builder1.setPositiveButton("Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
 
         }
 

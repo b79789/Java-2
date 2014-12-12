@@ -1,8 +1,10 @@
 package com.brianstacks.multi_activityapp.Fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -72,18 +74,51 @@ public class EnterDataFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EnteredData enteredData = new EnteredData();
                 EditText e1 = (EditText)getActivity().findViewById(R.id.e1);
                 EditText e2 = (EditText)getActivity().findViewById(R.id.e2);
                 EditText e3 = (EditText)getActivity().findViewById(R.id.e3);
-                EnteredData enteredData = new EnteredData();
-                enteredData.setName(e1.getText().toString());
-                enteredData.setAge(e2.getText().toString());
-                enteredData.setRace(e3.getText().toString());
-                enteredDataArrayList.add(enteredData);
-                mListener.onFragmentInteraction(enteredDataArrayList);
-
-               }
+                if (e1.getText().toString().equals("")){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setMessage("Must enter name");
+                    builder1.setPositiveButton("Exit",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }else if (e2.getText().toString().equals("")) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setMessage("Must enter age");
+                    builder1.setPositiveButton("Exit",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }else if (e3.getText().toString().equals("")){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setMessage("Must enter race");
+                    builder1.setPositiveButton("Exit",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }else {
+                    enteredData.setName(e1.getText().toString());
+                    enteredData.setAge(e2.getText().toString());
+                    enteredData.setRace(e3.getText().toString());
+                    enteredDataArrayList.add(enteredData);
+                    mListener.onFragmentInteraction(enteredDataArrayList);
+                }
+            }
         });
     }
     @Override

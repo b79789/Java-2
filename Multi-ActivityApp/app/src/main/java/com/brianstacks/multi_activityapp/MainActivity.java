@@ -24,6 +24,7 @@ public class MainActivity extends Activity implements DetailFragment.OnFragmentI
     private String mName;
     private String mAge;
     private String mRace;
+    public static final String enteredDataList_Text = "EnterDataFragment.Arg_Text";
     ArrayList<EnteredData> enteredDataArrayList;
 
 
@@ -66,6 +67,8 @@ public class MainActivity extends Activity implements DetailFragment.OnFragmentI
 
     @Override
     public void onFragmentInteraction(ArrayList<EnteredData> enteredDataArrayList1) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(enteredDataList_Text,enteredDataArrayList1);
         Log.v("MyObject",enteredDataArrayList1.toString());
         ListFrag listFrag = (ListFrag)getFragmentManager().findFragmentByTag(ListFrag.TAG);
         if (listFrag == null){
