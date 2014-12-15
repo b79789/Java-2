@@ -115,8 +115,8 @@ public class EnterDataFragment extends Fragment {
                     enteredData.setName(e1.getText().toString());
                     enteredData.setAge(e2.getText().toString());
                     enteredData.setRace(e3.getText().toString());
-                    enteredDataArrayList.add(enteredData);
-                    mListener.onFragmentInteraction(enteredDataArrayList);
+
+                    mListener.onFragmentInteraction(enteredData.getName(),enteredData.getAge(),enteredData.getRace());
                 }
             }
         });
@@ -135,7 +135,7 @@ public class EnterDataFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(ArrayList<EnteredData> enteredDataArrayList1);
+        public void onFragmentInteraction( String name,String age,String race);
 
     }
 

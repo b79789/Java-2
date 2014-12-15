@@ -45,12 +45,30 @@ public class DetailViewActivity extends Activity implements DetailFragment.OnFra
 
 
     @Override
-    public void onFragmentInteraction(ArrayList<EnteredData> enteredDataArrayList1) {
+    public void onFragmentInteraction2(EnteredData enteredData) {
+        DetailFragment dFrag = (DetailFragment) getFragmentManager().findFragmentByTag(DetailFragment.TAG);
+        if (dFrag == null){
 
+            dFrag = DetailFragment.newInstance(enteredData.getName(),enteredData.getAge(),enteredData.getRace());
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container2, dFrag, DetailFragment.TAG)
+                    .commit();
+        }else {
+            dFrag.setDisplayInfo(enteredData.getName(),enteredData.getAge(),enteredData.getRace());
+        }
     }
 
     @Override
-    public void onFragmentInteraction2(String myText) {
+    public void onFragmentInteraction(String name, String age, String race) {
+        DetailFragment dFrag = (DetailFragment) getFragmentManager().findFragmentByTag(DetailFragment.TAG);
+        if (dFrag == null){
 
+            dFrag = DetailFragment.newInstance(name,age,race);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container2, dFrag, DetailFragment.TAG)
+                    .commit();
+        }else {
+            dFrag.setDisplayInfo(name,age,race);
+        }
     }
 }

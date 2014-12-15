@@ -81,7 +81,7 @@ public class DetailFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction2(String myText);
+        public void onFragmentInteraction2(EnteredData enteredData);
     }
 
     public void setDisplayInfo(String name, String age, String race) {
