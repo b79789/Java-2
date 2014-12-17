@@ -31,15 +31,8 @@ import java.util.ArrayList;
 public class EnterDataFragment extends Fragment {
 
     public static final String TAG = "EnterDataFragment.TAG";
-    public static final String enteredDataList_Text = "EnterDataFragment.Arg_Text";
-    private static final String ARG_Name = "name";
-    private static final String ARG_Age = "age";
-    private static final String ARG_Race = "race";
-    private String mName;
-    private String mAge;
-    private String mRace;
     private OnFragmentInteractionListener mListener;
-    ArrayList<EnteredData> enteredDataArrayList = new ArrayList<>();
+
 
 
     public static EnterDataFragment newInstance() {
@@ -115,6 +108,7 @@ public class EnterDataFragment extends Fragment {
                     enteredData.setName(e1.getText().toString());
                     enteredData.setAge(e2.getText().toString());
                     enteredData.setRace(e3.getText().toString());
+                    
 
                     mListener.onFragmentInteraction(enteredData.getName(),enteredData.getAge(),enteredData.getRace());
                 }

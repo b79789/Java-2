@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements DetailFragment.OnFragmentI
         trans.commit();
     }
 
-    
+
 
     @Override
     public void onFragmentInteraction2(EnteredData enteredData) {

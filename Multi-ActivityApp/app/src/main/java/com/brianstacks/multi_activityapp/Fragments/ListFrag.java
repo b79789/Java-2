@@ -29,6 +29,7 @@ public class ListFrag extends ListFragment {
 
 
 
+
     public static ListFrag newInstance( String name,String age,String race){
         ListFrag listFrag =  new ListFrag();
         Bundle args = new Bundle();
@@ -75,10 +76,9 @@ public class ListFrag extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         super.onListItemClick(l, v, position, id);
-        String myString = (String) l.getItemAtPosition(position);
-
+        EnteredData enteredData = (EnteredData) l.getItemAtPosition(position);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-        builder1.setMessage(myString);
+        builder1.setMessage(enteredData.getName() + " "+enteredData.getAge()+ " "+enteredData.getRace());
         builder1.setCancelable(true);
         builder1.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {
