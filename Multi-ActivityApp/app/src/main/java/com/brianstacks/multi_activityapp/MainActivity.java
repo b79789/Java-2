@@ -3,6 +3,7 @@ package com.brianstacks.multi_activityapp;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ public class MainActivity extends Activity implements DetailFragment.OnFragmentI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        enteredDataArrayList = new ArrayList<>();
         FragmentManager mgr = getFragmentManager();
         FragmentTransaction trans = mgr.beginTransaction();
         ListFrag listFrag =  ListFrag.newInstance("Example","13","blue");
@@ -45,28 +47,26 @@ public class MainActivity extends Activity implements DetailFragment.OnFragmentI
     }
 
     @Override
-    public void onFragmentInteraction(String name, String age, String race) {
-        enteredDataArrayList = new ArrayList<>();
+    public void onFragmentInteraction(EnteredData enteredData) {
+        Helper helper = new Helper(this);
         Bundle bundle = new Bundle();
-        bundle.putString("name",name);
-        bundle.putString("name",age);
-        bundle.putString("name",race);
-        Log.v("MyObject", name + race + age);
-        EnteredData enteredData = new EnteredData();
-        enteredData.setName(name);
-        enteredData.setAge(age);
-        enteredData.setRace(race);
-        enteredDataArrayList.add(enteredData);
-        ListFrag listFrag = (ListFrag)getFragmentManager().findFragmentByTag(ListFrag.TAG);
-        if (listFrag == null){
-            listFrag = ListFrag.newInstance(name,age,race);
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container,listFrag,ListFrag.TAG)
-                    .commit();
+        ListFrag listFrag = (ListFrag) getFragmentManager().findFragmentByTag(ListFrag.TAG);
+            helper.writeToFile(this, "name", enteredData.getName());
+            helper.writeToFile(this, "age", enteredData.getAge());
+            helper.writeToFile(this, "race", enteredData.getRace());
+            enteredDataArrayList.add(enteredData);
 
-        }else {
-            DataAdapter dataAdapter = new DataAdapter(this,enteredDataArrayList);
-            listFrag.setListAdapter(dataAdapter);
+            if (listFrag == null) {
+                listFrag = ListFrag.newInstance(enteredData.getName(), enteredData.getAge(), enteredData.getRace());
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, listFrag, ListFrag.TAG)
+                        .commit();
+
+            } else {
+                DataAdapter dataAdapter = new DataAdapter(this, enteredDataArrayList);
+                listFrag.setListAdapter(dataAdapter);
+            }
         }
-    }
+
+
 }

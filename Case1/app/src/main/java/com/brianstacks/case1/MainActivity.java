@@ -1,5 +1,8 @@
 package com.brianstacks.case1;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,7 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity implements ActionBar.OnNavigationListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.OnNavigationListener,Team1Fragment.OnFragmentInteractionListener,Team2Fragment.OnFragmentInteractionListener,Team3Fragment.OnFragmentInteractionListener,Team4Fragment.OnFragmentInteractionListener,Team5Fragment.OnFragmentInteractionListener,Team6Fragment.OnFragmentInteractionListener {
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -45,6 +48,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
                                 getString(R.string.title_section1),
                                 getString(R.string.title_section2),
                                 getString(R.string.title_section3),
+                                getString(R.string.title_section4),
+                                getString(R.string.title_section5),
+                                getString(R.string.title_section6),
                         }),
                 this);
     }
@@ -90,45 +96,49 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
-        // When the given dropdown item is selected, show its contents in the
-        // container view.
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        if (position == 0){
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            Team1Fragment enterDataFragment = Team1Fragment.newInstance("","");
+            trans.replace(R.id.container, enterDataFragment, Team1Fragment.TAG);
+            trans.commit();
+        }else if (position == 1){
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            Team2Fragment enterDataFragment = Team2Fragment.newInstance("","");
+            trans.replace(R.id.container, enterDataFragment, Team2Fragment.TAG);
+            trans.commit();
+
+        }else if (position == 2){
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            Team3Fragment enterDataFragment = Team3Fragment.newInstance("","");
+            trans.replace(R.id.container, enterDataFragment, Team3Fragment.TAG);
+            trans.commit();
+        }else if (position == 3){
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            Team4Fragment enterDataFragment = Team4Fragment.newInstance("","");
+            trans.replace(R.id.container, enterDataFragment, Team4Fragment.TAG);
+            trans.commit();
+        }else if (position == 4){
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            Team5Fragment enterDataFragment = Team5Fragment.newInstance("","");
+            trans.replace(R.id.container, enterDataFragment, Team5Fragment.TAG);
+            trans.commit();
+        }else if (position == 5){
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            Team6Fragment enterDataFragment = Team6Fragment.newInstance("","");
+            trans.replace(R.id.container, enterDataFragment, Team6Fragment.TAG);
+            trans.commit();
+        }
         return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
     }
-
 }

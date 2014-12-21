@@ -1,9 +1,11 @@
 package com.brianstacks.multi_activityapp.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +62,19 @@ public class DetailFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(final Bundle _savedInstanceState) {
+        super.onActivityCreated(_savedInstanceState);
+        if (getArguments() != null) {
+
+            setDisplayInfo(getArguments().getString(ARG_Name), getArguments().getString(ARG_Age), getArguments().getString(ARG_Race));
+
+
+        }else {
+            setDisplayInfo("No","data","set");
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -86,6 +101,8 @@ public class DetailFragment extends Fragment {
 
     public void setDisplayInfo(String name, String age, String race) {
 
+
+
         // Get our TextView and set some text to it.
         TextView t1 = (TextView) getActivity().findViewById(R.id.text1);
         TextView t2 = (TextView) getActivity().findViewById(R.id.text2);
@@ -93,5 +110,12 @@ public class DetailFragment extends Fragment {
         t1.setText(name);
         t2.setText(age);
         t3.setText(race);
+    }
+
+    public void onShare(View view){
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "My name is"+mName);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share data with..."));
     }
 }

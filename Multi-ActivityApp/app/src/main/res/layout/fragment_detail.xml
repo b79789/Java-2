@@ -8,19 +8,25 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name" />
+        android:text="@string/name"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
     <TextView
         android:id="@+id/text1" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/age" />
+        android:text="@string/age"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text2"/>
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/race" />
+        android:text="@string/race"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text3"/>
@@ -29,12 +35,14 @@
         android:layout_height="wrap_content"
         android:text="@string/delete"
         android:layout_gravity="center"
-        android:layout_marginTop="2dp"/>
+        android:layout_marginTop="2dp"
+        android:onClick="onDelete"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/share"
         android:layout_gravity="center"
-        android:layout_marginTop="2dp"/>
+        android:layout_marginTop="2dp"
+        android:onClick="onShare"/>
 
 </LinearLayout>

@@ -108,9 +108,9 @@ public class EnterDataFragment extends Fragment {
                     enteredData.setName(e1.getText().toString());
                     enteredData.setAge(e2.getText().toString());
                     enteredData.setRace(e3.getText().toString());
-                    
 
-                    mListener.onFragmentInteraction(enteredData.getName(),enteredData.getAge(),enteredData.getRace());
+                    mListener.onFragmentInteraction(enteredData);
+
                 }
             }
         });
@@ -129,7 +129,7 @@ public class EnterDataFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction( String name,String age,String race);
+        public void onFragmentInteraction( EnteredData enteredData);
 
     }
 
